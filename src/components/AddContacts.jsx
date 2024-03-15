@@ -32,25 +32,31 @@ function AddContacts() {
     setEmail("");
     setMobile("");
     setName("");
+    document.getElementById("warning").innerHTML = "";
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const dataObj = {
-      id: contacts.length + 1,
-      name: name,
-      mobile: mobile,
-      email: email,
-      address: address,
-    };
+    if (name != "" && mobile != "" && email != "" && address != "") {
+      const dataObj = {
+        id: contacts.length + 1,
+        name: name,
+        mobile: mobile,
+        email: email,
+        address: address,
+      };
 
-    setContacts([...contacts, dataObj]);
-    setAddress("");
-    setEmail("");
-    setMobile("");
-    setName("");
-    setContactForm(false);
+      setContacts([...contacts, dataObj]);
+      setAddress("");
+      setEmail("");
+      setMobile("");
+      setName("");
+      document.getElementById("warning").innerHTML = "";
+      setContactForm(false);
+    } else {
+      document.getElementById("warning").innerHTML = "* Fill All Details";
+    }
   };
 
   return (
@@ -134,6 +140,10 @@ function AddContacts() {
             Reset
           </button>
         </div>
+        <h6
+          id="warning"
+          className="my-1 text-base text-red-600 text-center"
+        ></h6>
       </form>
     </div>
   );
